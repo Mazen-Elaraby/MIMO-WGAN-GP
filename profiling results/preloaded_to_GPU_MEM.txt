@@ -1,0 +1,94 @@
+--------------------------------------------------------------------------------
+  Environment Summary
+--------------------------------------------------------------------------------
+PyTorch 2.0.1+cu118 DEBUG compiled w/ CUDA 11.8
+Running with Python 3.10 and CUDA 11.8.89
+
+`pip3 list` truncated output:
+numpy==1.23.3
+torch==2.0.1+cu118
+torchaudio==2.0.2+cu118
+torchinfo==1.8.0
+torchvision==0.15.2+cu118
+--------------------------------------------------------------------------------
+  cProfile output
+--------------------------------------------------------------------------------
+         396356 function calls (387201 primitive calls) in 16.291 seconds
+
+   Ordered by: internal time
+   List reduced from 1450 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    60026    5.588    0.000    5.588    0.000 {built-in method torch.tensor}
+      213    3.286    0.015    3.286    0.015 {method 'run_backward' of 'torch._C._EngineBase' objects}
+       71    2.117    0.030    2.117    0.030 {built-in method torch.conv1d}
+     1420    1.992    0.001    1.992    0.001 {built-in method torch._C._nn.linear}
+       33    0.713    0.022    0.713    0.022 {built-in method _ctypes.LoadLibrary}
+        3    0.680    0.227    0.680    0.227 {method 'array_from_header' of 'scipy.io.matlab._mio5_utils.VarReader5' objects}
+       27    0.420    0.016    0.420    0.016 {built-in method _imp.create_dynamic}
+        3    0.138    0.046    5.725    1.908 F:\GP\sem 2\MIMO GAN\src\data_setup.py:57(<listcomp>)
+      284    0.097    0.000    0.097    0.000 {built-in method torch._foreach_mul_}
+      284    0.097    0.000    0.097    0.000 {built-in method torch._foreach_add_}
+        1    0.096    0.096    8.319    8.319 F:\GP\sem 2\MIMO GAN\src\engine.py:16(train_WGAN_GP)
+      568    0.071    0.000    0.071    0.000 {built-in method torch.layer_norm}
+        6    0.068    0.011    0.068    0.011 {method 'read_full_tag' of 'scipy.io.matlab._mio5_utils.VarReader5' objects}
+        1    0.065    0.065   16.291   16.291 train.py:1(<module>)
+     3413    0.062    0.000    0.062    0.000 {method 'item' of 'torch._C._TensorBase' objects}
+
+
+--------------------------------------------------------------------------------
+  autograd profiler output (CPU mode)
+--------------------------------------------------------------------------------
+        top 15 events sorted by cpu_time_total
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                             aten::item         0.01%       6.000us        98.04%      55.683ms      55.683ms             1
+                              aten::_local_scalar_dense        98.03%      55.677ms        98.03%      55.677ms      55.677ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.03%      16.000us        82.80%      47.027ms      47.027ms             1
+                       NativeLayerNormBackwardBackward0         0.46%     261.000us        82.75%      46.999ms      46.999ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%      11.000us        34.81%      19.769ms      19.769ms             1
+                       NativeLayerNormBackwardBackward0         0.33%     185.000us        34.76%      19.742ms      19.742ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%      11.000us        34.41%      19.542ms      19.542ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%      11.000us        32.37%      18.386ms      18.386ms             1
+                       NativeLayerNormBackwardBackward0         0.29%     164.000us        32.24%      18.311ms      18.311ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%      11.000us        31.26%      17.753ms      17.753ms             1
+                       NativeLayerNormBackwardBackward0         0.27%     151.000us        31.21%      17.726ms      17.726ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%       9.000us        29.50%      16.755ms      16.755ms             1
+                       NativeLayerNormBackwardBackward0         0.25%     141.000us        29.42%      16.710ms      16.710ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.02%      11.000us        29.26%      16.618ms      16.618ms             1
+                       NativeLayerNormBackwardBackward0         0.23%     130.000us        29.21%      16.589ms      16.589ms             1
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 56.795ms
+
+--------------------------------------------------------------------------------
+  autograd profiler output (CUDA mode)
+--------------------------------------------------------------------------------
+        top 15 events sorted by cpu_time_total
+
+        Because the autograd profiler uses the CUDA event API,
+        the CUDA time column reports approximately max(cuda_time, cpu_time).
+        Please ignore this output if your code does not use CUDA.
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                               Optimizer.step#Adam.step        21.58%       9.266ms        71.05%      30.502ms      30.502ms     744.000us        22.84%       7.232ms       7.232ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.69%     295.000us        41.61%      17.862ms      17.862ms      55.000us         1.69%       3.137ms       3.137ms             1
+                       NativeLayerNormBackwardBackward0         4.30%       1.848ms        40.87%      17.546ms      17.546ms     619.000us        19.00%       2.824ms       2.824ms             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.38%     163.000us        38.93%      16.711ms      16.711ms      34.000us         1.04%       1.907ms       1.907ms             1
+                       NativeLayerNormBackwardBackward0         2.79%       1.199ms        38.39%      16.481ms      16.481ms     504.000us        15.47%       1.843ms       1.843ms             1
+                                       aten::reshape_as         0.17%      73.000us        32.30%      13.868ms      13.868ms       4.000us         0.12%      37.000us      37.000us             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.07%      31.000us        32.14%      13.797ms      13.797ms      31.000us         0.95%       2.311ms       2.311ms             1
+                                          aten::reshape        32.13%      13.793ms        32.13%      13.795ms      13.795ms       4.000us         0.12%      33.000us      33.000us             1
+                       NativeLayerNormBackwardBackward0         3.88%       1.666ms        32.04%      13.756ms      13.756ms     685.000us        21.03%       2.275ms       2.275ms             1
+                                       aten::reshape_as         0.10%      42.000us        30.53%      13.107ms      13.107ms       5.000us         0.15%     292.000us     292.000us             1
+                                          aten::reshape        30.43%      13.063ms        30.43%      13.065ms      13.065ms     286.000us         8.78%     287.000us     287.000us             1
+                               Optimizer.step#Adam.step         1.73%     744.000us        29.73%      12.765ms      12.765ms     262.000us         8.04%       3.817ms       3.817ms             1
+    autograd::engine::evaluate_function: AddmmBackward0         0.90%     385.000us        29.06%      12.477ms      12.477ms       9.000us         0.28%     903.000us     903.000us             1
+    autograd::engine::evaluate_function: AddmmBackward0         0.75%     321.000us        28.46%      12.217ms      12.217ms       9.000us         0.28%     909.000us     909.000us             1
+autograd::engine::evaluate_function: NativeLayerNorm...         0.10%      41.000us        28.19%      12.101ms      12.101ms       7.000us         0.21%       2.669ms       2.669ms             1
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 42.930ms
+Self CUDA time total: 3.258ms

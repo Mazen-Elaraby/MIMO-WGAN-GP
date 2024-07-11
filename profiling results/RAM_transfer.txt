@@ -1,0 +1,94 @@
+--------------------------------------------------------------------------------
+  Environment Summary
+--------------------------------------------------------------------------------
+PyTorch 2.0.1+cu118 DEBUG compiled w/ CUDA 11.8
+Running with Python 3.10 and CUDA 11.8.89
+
+`pip3 list` truncated output:
+numpy==1.23.3
+torch==2.0.1+cu118
+torchaudio==2.0.2+cu118
+torchinfo==1.8.0
+torchvision==0.15.2+cu118
+--------------------------------------------------------------------------------
+  cProfile output
+--------------------------------------------------------------------------------
+         376457 function calls (367302 primitive calls) in 7.384 seconds
+
+   Ordered by: internal time
+   List reduced from 1439 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      101    2.386    0.024    2.386    0.024 {method 'to' of 'torch._C._TensorBase' objects}
+       28    0.874    0.031    0.874    0.031 {method 'double' of 'torch._C._TensorBase' objects}
+     1420    0.862    0.001    0.862    0.001 {built-in method torch._C._nn.linear}
+      213    0.766    0.004    0.766    0.004 {method 'run_backward' of 'torch._C._EngineBase' objects}
+       71    0.692    0.010    0.692    0.010 {built-in method torch.conv1d}
+        3    0.685    0.228    0.685    0.228 {method 'array_from_header' of 'scipy.io.matlab._mio5_utils.VarReader5' objects}
+       71    0.329    0.005    0.329    0.005 {built-in method torch.stack}
+        6    0.067    0.011    0.067    0.011 {method 'read_full_tag' of 'scipy.io.matlab._mio5_utils.VarReader5' objects}
+       27    0.046    0.002    0.046    0.002 {built-in method _imp.create_dynamic}
+    36000    0.045    0.000    0.045    0.000 {built-in method torch.from_numpy}
+       71    0.037    0.001    0.037    0.001 {method 'pin_memory' of 'torch._C._TensorBase' objects}
+       72    0.035    0.000    0.493    0.007 C:\Users\Mazen\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\utils\data\dataloader.py:675(_next_data)
+        1    0.029    0.029    5.473    5.473 F:\GP\sem 2\MIMO GAN\src\engine.py:16(train_WGAN_GP)
+      169    0.025    0.000    0.025    0.000 {built-in method io.open_code}
+      568    0.022    0.000    0.022    0.000 {built-in method torch.layer_norm}
+
+
+--------------------------------------------------------------------------------
+  autograd profiler output (CPU mode)
+--------------------------------------------------------------------------------
+        top 15 events sorted by cpu_time_total
+
+------------------  ------------  ------------  ------------  ------------  ------------  ------------
+              Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls
+------------------  ------------  ------------  ------------  ------------  ------------  ------------
+          aten::to         0.00%       4.000us        20.34%      33.299ms      33.299ms             1
+    aten::_to_copy         0.00%       7.000us        20.34%      33.295ms      33.295ms             1
+       aten::copy_        20.33%      33.281ms        20.33%      33.281ms      33.281ms             1
+          aten::to         0.00%       5.000us        20.04%      32.803ms      32.803ms             1
+    aten::_to_copy         0.00%       7.000us        20.03%      32.798ms      32.798ms             1
+       aten::copy_        20.03%      32.783ms        20.03%      32.783ms      32.783ms             1
+          aten::to         0.00%       3.000us        19.96%      32.672ms      32.672ms             1
+    aten::_to_copy         0.00%       6.000us        19.96%      32.669ms      32.669ms             1
+       aten::copy_        19.95%      32.656ms        19.95%      32.656ms      32.656ms             1
+          aten::to         0.00%       4.000us        19.89%      32.557ms      32.557ms             1
+    aten::_to_copy         0.00%       7.000us        19.89%      32.553ms      32.553ms             1
+       aten::copy_        19.88%      32.538ms        19.88%      32.538ms      32.538ms             1
+          aten::to         0.00%       5.000us        19.80%      32.412ms      32.412ms             1
+    aten::_to_copy         0.00%       7.000us        19.80%      32.407ms      32.407ms             1
+       aten::copy_        19.79%      32.392ms        19.79%      32.392ms      32.392ms             1
+------------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 163.705ms
+
+--------------------------------------------------------------------------------
+  autograd profiler output (CUDA mode)
+--------------------------------------------------------------------------------
+        top 15 events sorted by cpu_time_total
+
+        Because the autograd profiler uses the CUDA event API,
+        the CUDA time column reports approximately max(cuda_time, cpu_time).
+        Please ignore this output if your code does not use CUDA.
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                               Optimizer.step#Adam.step         3.52%      14.876ms        15.37%      65.038ms      65.038ms     844.000us         0.41%      10.875ms      10.875ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.41%      31.376ms         8.75%      37.026ms      37.026ms      18.482ms         8.97%      27.608ms      27.608ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.45%      31.536ms         8.72%      36.911ms      36.911ms      14.235ms         6.91%      24.995ms      24.995ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.33%      31.016ms         8.65%      36.605ms      36.605ms      15.381ms         7.46%      26.480ms      26.480ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.10%      30.026ms         8.58%      36.306ms      36.306ms      20.408ms         9.90%      29.742ms      29.742ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.25%      30.674ms         8.54%      36.149ms      36.149ms      13.269ms         6.44%      25.801ms      25.801ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.25%      30.672ms         8.52%      36.050ms      36.050ms      12.282ms         5.96%      24.712ms      24.712ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.13%      30.179ms         8.46%      35.809ms      35.809ms      17.216ms         8.35%      27.586ms      27.586ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.14%      30.203ms         8.43%      35.666ms      35.666ms      12.121ms         5.88%      25.047ms      25.047ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         7.03%      29.735ms         8.32%      35.195ms      35.195ms      16.662ms         8.09%      25.561ms      25.561ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         6.47%      27.367ms         7.86%      33.247ms      33.247ms      12.952ms         6.28%      25.450ms      25.450ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         6.48%      27.426ms         7.64%      32.343ms      32.343ms      13.621ms         6.61%      23.695ms      23.695ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         6.19%      26.211ms         7.49%      31.690ms      31.690ms      12.959ms         6.29%      23.176ms      23.176ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         6.26%      26.504ms         7.49%      31.681ms      31.681ms       6.145ms         2.98%      22.664ms      22.664ms             1
+enumerate(DataLoader)#_SingleProcessDataLoaderIter._...         6.00%      25.377ms         7.37%      31.185ms      31.185ms      19.503ms         9.46%      31.199ms      31.199ms             1
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 423.178ms
+Self CUDA time total: 206.080ms
